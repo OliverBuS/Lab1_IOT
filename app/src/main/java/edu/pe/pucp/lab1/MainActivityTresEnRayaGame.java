@@ -1,5 +1,6 @@
 package edu.pe.pucp.lab1;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -30,7 +31,7 @@ public class MainActivityTresEnRayaGame extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_main_tres_en_raya_game);
-
+        
         botones[0][0] = (Button) findViewById(R.id.tres11);
         botones[0][1] = (Button) findViewById(R.id.tres12);
         botones[0][2] = (Button) findViewById(R.id.tres13);
@@ -60,6 +61,8 @@ public class MainActivityTresEnRayaGame extends AppCompatActivity {
             return true;
         }
 
+
+
         ev = botones[1][0].getText().toString();
         boolean row2 = !ev.equals("-") &&
                 ev.equals(botones[1][1].getText().toString()) &&
@@ -72,6 +75,7 @@ public class MainActivityTresEnRayaGame extends AppCompatActivity {
                 estadisticas.add(GANOO);
                 ((TextView) findViewById(R.id.textGanador)).setText("Ganó O");
             }
+
             return true;
         }
         ev = botones[2][0].getText().toString();
@@ -86,6 +90,7 @@ public class MainActivityTresEnRayaGame extends AppCompatActivity {
                 estadisticas.add(GANOO);
                 ((TextView) findViewById(R.id.textGanador)).setText("Ganó O");
             }
+
             return true;
         }
 
@@ -101,10 +106,11 @@ public class MainActivityTresEnRayaGame extends AppCompatActivity {
                 estadisticas.add(GANOO);
                 ((TextView) findViewById(R.id.textGanador)).setText("Ganó O");
             }
+
             return true;
         }
 
-        ev = botones[1][1].getText().toString();
+        ev = botones[0][1].getText().toString();
         boolean col2 = !ev.equals("-") &&
                 ev.equals(botones[1][1].getText().toString()) &&
                 ev.equals(botones[2][1].getText().toString());
@@ -116,12 +122,13 @@ public class MainActivityTresEnRayaGame extends AppCompatActivity {
                 estadisticas.add(GANOO);
                 ((TextView) findViewById(R.id.textGanador)).setText("Ganó O");
             }
+
             return true;
         }
 
-        ev = botones[2][2].getText().toString();
+        ev = botones[0][2].getText().toString();
         boolean col3 = !ev.equals("-") &&
-                ev.equals(botones[2][2].getText().toString()) &&
+                ev.equals(botones[1][2].getText().toString()) &&
                 ev.equals(botones[2][2].getText().toString());
         if(col3){
             if(ev.equals("X")){
@@ -131,6 +138,7 @@ public class MainActivityTresEnRayaGame extends AppCompatActivity {
                 estadisticas.add(GANOO);
                 ((TextView) findViewById(R.id.textGanador)).setText("Ganó O");
             }
+
             return true;
         }
 
@@ -146,13 +154,14 @@ public class MainActivityTresEnRayaGame extends AppCompatActivity {
                 estadisticas.add(GANOO);
                 ((TextView) findViewById(R.id.textGanador)).setText("Ganó O");
             }
+
             return true;
         }
 
-        ev = botones[0][2].getText().toString();
+        ev = botones[2][0].getText().toString();
         boolean diag2 = !ev.equals("-") &&
                 ev.equals(botones[1][1].getText().toString()) &&
-                ev.equals(botones[2][0].getText().toString());
+                ev.equals(botones[0][2].getText().toString());
         if(diag2){
             if(ev.equals("X")){
                 estadisticas.add(GANOX);
@@ -161,6 +170,7 @@ public class MainActivityTresEnRayaGame extends AppCompatActivity {
                 estadisticas.add(GANOO);
                 ((TextView) findViewById(R.id.textGanador)).setText("Ganó O");
             }
+
             return true;
         }
 
@@ -168,42 +178,49 @@ public class MainActivityTresEnRayaGame extends AppCompatActivity {
     }
 
     public void play(View view) {
-        if(termino){
-            return;
-        }
+
 
         Button button = (Button) view;
+        if(termino || !button.getText().toString().equals("-")){
+            return;
+        }
         if (turno % 2 == 0) {
             button.setText("X");
         } else {
             button.setText("O");
         }
 
-
-        if (turno > 4) {
-            boolean termino = checkWin();
-            if (turno == 9 && !termino) {
+        if (turno > 3) {
+            boolean win = checkWin();
+            if(win){
+                termino=true;
+                return;
+            }
+            if (turno == 8 && !win) {
                 termino = true;
                 estadisticas.add(EMPATE);
                 ((TextView) findViewById(R.id.textGanador)).setText("Empate");
             }
-        } else {
-            boolean termino = false;
         }
 
         turno++;
     }
 
     public void newGame(View view) {
+        if(turno==0){
+            return;
+        }
+        turno=0;
         if(!termino){
             estadisticas.add(CANCELADO);
-            termino = false;
         }
         for(Button[] i : botones){
             for(Button j : i){
                 j.setText("-");
             }
         }
+        ((TextView) findViewById(R.id.textGanador)).setText("");
+        termino = false;
     }
 
     public void showStatistics(View view) {

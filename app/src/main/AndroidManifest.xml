@@ -25,13 +25,18 @@
 
         <activity
             android:name=".MainActivityTresEnRayaEstadisticas"
-            android:exported="false" />
+            android:exported="false"
+            android:parentActivityName=".MainActivityTresEnRayaGame"
+            android:label="Juego - Tres en Raya"/>
         <activity
             android:name=".MainActivityTresEnRayaGame"
-            android:exported="false" />
+            android:exported="false"
+            android:parentActivityName=".MainActivity"
+            android:label="Juego - Tres en Raya"/>
         <activity
             android:name=".MainActivity"
-            android:exported="true">
+            android:exported="true"
+            android:label="APPSIoT - Lab 1">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

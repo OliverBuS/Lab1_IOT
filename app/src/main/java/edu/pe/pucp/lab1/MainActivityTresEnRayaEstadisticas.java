@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Switch;
 import android.widget.TextView;
 
@@ -22,24 +23,30 @@ public class MainActivityTresEnRayaEstadisticas extends AppCompatActivity {
 
         ArrayList<Integer> est = (ArrayList<Integer>) intent.getSerializableExtra("estadisticas");
 
-        for(Integer i : est){
-            switch(i){
-                case -3:
-                    estadisticasStr+="Empate\n";
-                    break;
-                case -2:
-                    estadisticasStr+="Ganó X\n";
-                    break;
-                case -1:
-                    estadisticasStr+="Gano O\n";
-                    break;
-                case -4:
-                    estadisticasStr+="Cancelado\n";
-                    break;
+        if(!est.isEmpty()) {
+            for (Integer i : est) {
+                switch (i) {
+                    case -3:
+                        estadisticasStr += "Empate\n";
+                        break;
+                    case -2:
+                        estadisticasStr += "Ganó X\n";
+                        break;
+                    case -1:
+                        estadisticasStr += "Gano O\n";
+                        break;
+                    case -4:
+                        estadisticasStr += "Cancelado\n";
+                        break;
+                }
             }
+            ((TextView) findViewById(R.id.showEstadisticas)).setText(estadisticasStr);
         }
 
-        ((TextView) findViewById(R.id.showEstadisticas)).setText(estadisticasStr);
 
+    }
+
+    public void back(View view){
+        finish();
     }
 }

@@ -16,7 +16,7 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="440dp">
+        android:layout_height="400dp">
         <TextView
             android:paddingVertical="40dp"
             android:id="@+id/showEstadisticas"
@@ -30,12 +30,13 @@
     </ScrollView>
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="140dp">
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:text="Nuevo Juego"
-            android:textSize="18sp"/>
+            android:textSize="16sp"
+            android:onClick="back"/>
     </RelativeLayout>
 </LinearLayout>
