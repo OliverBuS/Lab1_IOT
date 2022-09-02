@@ -23,22 +23,23 @@ public class MainActivityTresEnRayaGame extends AppCompatActivity {
     static int CANCELADO= -4;
     private ArrayList<Integer> estadisticas = new ArrayList<>();
 
-    private Button[][] botones = {
-            {(Button) findViewById(R.id.tres11),
-            (Button) findViewById(R.id.tres12),
-            (Button) findViewById(R.id.tres13)},
-            {(Button) findViewById(R.id.tres21),
-            (Button) findViewById(R.id.tres22),
-            (Button) findViewById(R.id.tres23)},
-            {(Button) findViewById(R.id.tres31),
-            (Button) findViewById(R.id.tres32),
-            (Button) findViewById(R.id.tres33)}
-    };
+    private Button[][] botones = new Button[3][3];
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_main_tres_en_raya_game);
+
+        botones[0][0] = (Button) findViewById(R.id.tres11);
+        botones[0][1] = (Button) findViewById(R.id.tres12);
+        botones[0][2] = (Button) findViewById(R.id.tres13);
+        botones[1][0] = (Button) findViewById(R.id.tres21);
+        botones[1][1] = (Button) findViewById(R.id.tres22);
+        botones[1][2] = (Button) findViewById(R.id.tres23);
+        botones[2][0] = (Button) findViewById(R.id.tres31);
+        botones[2][1] = (Button) findViewById(R.id.tres32);
+        botones[2][2] = (Button) findViewById(R.id.tres33);
     }
 
 
