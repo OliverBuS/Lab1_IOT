@@ -19,10 +19,6 @@
             android:parentActivityName=".activity_mem"
             android:label="Juego - Memoria"/>
         <activity
-            android:name=".activity_ter"
-            android:exported="false"
-            android:parentActivityName=".MainActivity" />
-        <activity
             android:name=".activity_mem"
             android:exported="false"
             android:parentActivityName=".MainActivity"
