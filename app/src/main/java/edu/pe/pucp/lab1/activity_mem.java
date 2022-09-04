@@ -162,7 +162,7 @@ public class activity_mem extends AppCompatActivity {
                     fin =  Calendar.getInstance().getTime();
                     Long dif =fin.getTime()-inicio.getTime();
                     est.add((float) (Math.round((dif.floatValue()/60000) * 100.0) / 100.0));
-
+                    termino=true;
                     textoTiempo = findViewById(R.id.texto_tiempo);
                     textoTiempo.setText("Termino en "+ Math.round((dif.floatValue()/60000) * 100.0) / 100.0 + " minutos");
 
@@ -196,7 +196,7 @@ public class activity_mem extends AppCompatActivity {
                 est.add(Float.valueOf("0"));
             }
         }
-
+        termino=false;
 
         cargarTablero();
         cargarBotones();

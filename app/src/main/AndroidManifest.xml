@@ -15,7 +15,9 @@
         tools:targetApi="31">
         <activity
             android:name=".MemStad"
-            android:exported="false" />
+            android:exported="false"
+            android:parentActivityName=".activity_mem"
+            android:label="Juego - Memoria"/>
         <activity
             android:name=".activity_ter"
             android:exported="false"
@@ -23,7 +25,8 @@
         <activity
             android:name=".activity_mem"
             android:exported="false"
-            android:parentActivityName=".MainActivity" />
+            android:parentActivityName=".MainActivity"
+            android:label="Juego - Memoria"/>
         <activity
             android:name=".MainActivityTresEnRayaEstadisticas"
             android:exported="false"
