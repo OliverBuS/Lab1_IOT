@@ -3,6 +3,7 @@ package edu.pe.pucp.lab1;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -14,11 +15,22 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.Date;
+import java.util.concurrent.TimeUnit;
 
 public class activity_mem extends AppCompatActivity {
 
+
+    //Inicio/ FIN
+    private Date inicio;
+    private Date fin;
+
+    //termino
+    private boolean termino=false;
+    private boolean first = true;
 
     // variables para los componentes de la vista
     ImageButton imb00, imb01, imb02, imb03, imb04, imb05, imb06, imb07, imb08, imb09, imb10, imb11, imb12, imb13, imb14, imb15;
@@ -39,6 +51,8 @@ public class activity_mem extends AppCompatActivity {
     boolean bloqueo = false;
     final Handler handler = new Handler();
 
+    //estadisticas
+    private ArrayList<Float> est = new ArrayList<>();
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -92,12 +106,7 @@ public class activity_mem extends AppCompatActivity {
             }
         });
 
-        botonSalir.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
+
     }
 
     private void cargarTexto(){
@@ -151,6 +160,9 @@ public class activity_mem extends AppCompatActivity {
                 puntuacion++;
                 textoPuntuacion.setText("Puntuación: " + puntuacion);
                 if(aciertos == imagenes.length){
+                    fin =  Calendar.getInstance().getTime();
+                    Long dif =fin.getTime()-inicio.getTime();
+                    est.add(dif.floatValue()/60000);
                     Toast toast = Toast.makeText(getApplicationContext(), "Has ganado!!", Toast.LENGTH_LONG);
                     toast.show();
                 }
@@ -175,6 +187,15 @@ public class activity_mem extends AppCompatActivity {
     }
 
     private void init(){
+        if(first){
+            first=false;
+        }else{
+            if(!termino){
+                est.add(Float.valueOf("0"));
+            }
+        }
+
+
         cargarTablero();
         cargarBotones();
         cargarTexto();
@@ -194,7 +215,8 @@ public class activity_mem extends AppCompatActivity {
                     tablero[i].setImageResource(fondo);
                 }
             }
-        }, 500);
+        }, 1000);
+
         for(int i=0; i<tablero.length; i++) {
             final int j = i;
             tablero[i].setEnabled(true);
@@ -207,7 +229,13 @@ public class activity_mem extends AppCompatActivity {
             });
         }
 
+        inicio= Calendar.getInstance().getTime();
+
     }
 
-
+     public void mostrarEstadisticas(View view){
+        Intent intent = new Intent(activity_mem.this,MemStad.class);
+        intent.putExtra("est",est);
+        startActivity(intent);
+    }
 }
