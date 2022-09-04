@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">Lab1</string>
+    <string name="boton_init_play">Jugar</string>
+    <string name="boton_init_quit">Salir</string>
+    <string name="boton_juego_reinit">Nuevo</string>
+    <string name="boton_juego_quit">Estaditicas</string>
 </resources>
