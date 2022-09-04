@@ -36,8 +36,8 @@ public class activity_mem extends AppCompatActivity {
     ImageButton imb00, imb01, imb02, imb03, imb04, imb05, imb06, imb07, imb08, imb09, imb10, imb11, imb12, imb13, imb14, imb15;
     ImageButton[] tablero = new ImageButton[16];
     Button botonReiniciar, botonSalir;
-    TextView textoPuntuacion;
-    int puntuacion;
+    TextView textoTiempo;
+
     int aciertos;
 
     //imagenes
@@ -110,10 +110,10 @@ public class activity_mem extends AppCompatActivity {
     }
 
     private void cargarTexto(){
-        textoPuntuacion = findViewById(R.id.texto_puntuacion);
-        puntuacion = 0;
+        textoTiempo = findViewById(R.id.texto_tiempo);
+        textoTiempo.setText("");
         aciertos = 0;
-        textoPuntuacion.setText("Puntuacion: " + puntuacion);
+
     }
 
     private void cargarImagenes(){
@@ -157,14 +157,17 @@ public class activity_mem extends AppCompatActivity {
                 primero = null;
                 bloqueo = false;
                 aciertos++;
-                puntuacion++;
-                textoPuntuacion.setText("Puntuación: " + puntuacion);
+
                 if(aciertos == imagenes.length){
                     fin =  Calendar.getInstance().getTime();
                     Long dif =fin.getTime()-inicio.getTime();
-                    est.add(dif.floatValue()/60000);
-                    Toast toast = Toast.makeText(getApplicationContext(), "Has ganado!!", Toast.LENGTH_LONG);
-                    toast.show();
+                    est.add((float) (Math.round((dif.floatValue()/60000) * 100.0) / 100.0));
+
+                    textoTiempo = findViewById(R.id.texto_tiempo);
+                    textoTiempo.setText("Termino en "+ Math.round((dif.floatValue()/60000) * 100.0) / 100.0 + " minutos");
+
+                    //Toast toast = Toast.makeText(getApplicationContext(), "Has ganado!!", Toast.LENGTH_LONG);
+                    //toast.show();
                 }
             } else {
                 handler.postDelayed(new Runnable() {
@@ -178,8 +181,7 @@ public class activity_mem extends AppCompatActivity {
                         imgb.setEnabled(true);
                         bloqueo = false;
                         primero = null;
-                        puntuacion--;
-                        textoPuntuacion.setText("Puntuación: " + puntuacion);
+
                     }
                 }, 1000);
             }
